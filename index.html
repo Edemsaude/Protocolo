@@ -8,22 +8,55 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 50px;
+      margin: 50px 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    h2 {
+      margin-top: 30px;
+      color: #34495e;
+    }
+    .subtitulo {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+      color: #555;
     }
     input, button {
       padding: 10px;
       margin: 5px;
       font-size: 16px;
+      width: 300px;
+      max-width: 90%;
+    }
+    button {
+      cursor: pointer;
+    }
+    #exemplo {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: -5px;
+      margin-bottom: 20px;
     }
     #resultado {
-      margin-top: 20px;
+      margin-top: 30px;
       display: none;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #f2f2f2;
+      padding: 20px;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
   <h1>Consultar Protocolo</h1>
+  <p class="subtitulo">Disk Dengue CG: um serviço da Coordenadoria de Controle de Endemias Vetoriais - CCEV</p>
+
   <input type="text" id="protocolo" placeholder="Digite o protocolo" />
+  <p id="exemplo">ex: DEN-20250523-000</p>
   <button onclick="consultarProtocolo()">Consultar</button>
 
   <div id="resultado">
@@ -67,7 +100,7 @@
           document.getElementById('data').innerText = `Data: ${data.data}`;
         }
       } catch (error) {
-        alert('Erro ao consultar o protocolo. Tente novamente mais tarde.');
+        alert('Sua reclamação está sendo analisada pela equipe do Disk Dengue. Aguarde o parecer. Agradecemos pela colaboração!');
       }
     }
   </script>
