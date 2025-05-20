@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protocolo Disk Dengue</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+    }
+    #resultado {
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Consultar Protocolo</h1>
+  <input type="text" id="protocolo" placeholder="Digite o protocolo" />
+  <button onclick="consultarProtocolo()">Consultar</button>
+
+  <div id="resultado">
+    <h2>Resultado da Consulta</h2>
+    <p id="tipoReclamacao"></p>
+    <p id="descricao"></p>
+    <p id="endereco"></p>
+    <p id="referencia"></p>
+    <p id="bairro"></p>
+    <p id="telefone"></p>
+    <p id="avaliacao"></p>
+    <p id="constatacao"></p>
+    <p id="data"></p>
+  </div>
+
+  <script>
+    async function consultarProtocolo() {
+      const protocolo = document.getElementById('protocolo').value.trim();
+      if (!protocolo) {
+        alert('Por favor, digite o número do protocolo.');
+        return;
+      }
+
+      try {
+        const url = `https://script.google.com/macros/s/AKfycbyPUG9pz7HsktZsjpcRdgafjgEQ4IRbW_H6TEuNQsy2HIHeFfMfh6tVTHFWQhwnGfqk8g/exec?protocolo=${encodeURIComponent(protocolo)}`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data === 'Protocolo não encontrado.') {
+          alert('Protocolo não encontrado.');
+        } else {
+          document.getElementById('resultado').style.display = 'block';
+          document.getElementById('tipoReclamacao').innerText = `Tipo de Reclamação: ${data.tipoReclamacao}`;
+          document.getElementById('descricao').innerText = `Descrição: ${data.descricao}`;
+          document.getElementById('endereco').innerText = `Endereço: ${data.endereco}`;
+          document.getElementById('referencia').innerText = `Referência: ${data.referencia}`;
+          document.getElementById('bairro').innerText = `Bairro: ${data.bairro}`;
+          document.getElementById('telefone').innerText = `Telefone: ${data.telefone}`;
+          document.getElementById('avaliacao').innerText = `Avaliação: ${data.avaliacao}`;
+          document.getElementById('constatacao').innerText = `Constatação: ${data.constatacao}`;
+          document.getElementById('data').innerText = `Data: ${data.data}`;
+        }
+      } catch (error) {
+        alert('Erro ao consultar o protocolo. Tente novamente mais tarde.');
+      }
+    }
+  </script>
+</body>
+</html>
